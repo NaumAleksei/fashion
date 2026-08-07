@@ -1,0 +1,1175 @@
+/* ==========================================
+   1. ИМПОРТ ШРИФТОВ И ПЕРЕМЕННЫЕ
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Caveat:wght@500&display=swap');
+
+:root {
+  /* Цветовая палитра */
+  --bg-main: #fcf9f7;
+  --bg-card: #f4eae4;
+  --bg-dark: #b5978e;          /* Новый светлый цвет для шапки */
+  --text-dark: #221e1d;
+  --text-light: #ffffff;
+  --text-muted: #7d706c;
+  --accent-burgundy: #b5978e;  /* Новый светлый цвет кнопок как на скриншоте */
+  
+  /* Типографика */
+  --font-heading: 'Manrope', Arial, sans-serif;
+  --font-body: 'Manrope', Arial, sans-serif;
+  --font-script: 'Caveat', cursive;
+}
+
+/* ==========================================
+   2. СБРОС И БАЗОВЫЕ СТИЛИ
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 30px;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.section-block {
+  margin-top: 100px;
+}
+
+/* ==========================================
+   БАЗОВЫЕ СТИЛИ ЗАГОЛОВКОВ (ТОНКИЙ ШРИФТ)
+   ========================================== */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 300;           /* Было 500 -> стало 300 (Тонкий) */
+  letter-spacing: 0.06em;     /* Небольшая разрядка подчеркивает тонкий шрифт */
+}
+
+/* 1. Главный заголовок в Hero-секции */
+.hero-text h1 {
+  font-size: 2.4rem;
+  line-height: 1.15;
+  color: var(--text-dark);
+  font-weight: 300;           /* Было 600 -> стало 300 */
+}
+
+.hero-text .subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 12px 0 25px;
+  font-weight: 300;           /* Добавлено для тонкого начертания */
+}
+
+/* 2. Заголовки основных секций на главной (Обо мне, Прайс, Контакты) */
+.about-text h2,
+.price-content h2,
+.achievements-content h2,
+.contacts-info h2,
+.portfolio-header h2 {
+  font-size: 1.75rem;
+  font-weight: 300;           /* Было 600 -> стало 300 */
+  margin-bottom: 20px;
+}
+
+/* 3. Заголовки отдельных страниц (Услуги, Обучение) */
+.service-page-title,
+.page-title {
+  font-size: 1.9rem;
+  font-weight: 300;           /* Было 600 -> стало 300 */
+  letter-spacing: 0.06em;
+  margin-bottom: 30px;
+}
+
+/* 4. Заголовки карточек и подсекций */
+.carousel-title,
+.course-subtitle {
+  font-size: 1.05rem;
+  font-weight: 400;           /* Было 600 -> стало 400 (аккуратный средний шрифт для мелких заголовков) */
+  letter-spacing: 0.06em;
+}
+
+/* ==========================================
+   3. ШАПКА (СЕРАЯ ПОЛОСА) И HERO (БЕЗ ПОДЛОЖКИ)
+   ========================================== */
+
+/* Узкая серая шапка */
+.header-nav {
+  padding: 12px 0;
+  position: sticky;    /* Залипание элемента при скролле */
+  top: 0;              /* Фиксация у самого верха экрана */
+  z-index: 1000;       /* Поверх всех остальных элементов */
+  background-color: #b5978e;
+}
+
+/* Контейнер шапки: гибкое выравнивание */
+.header-container,
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Логотип */
+.site-logo, .logo {
+  max-height: 35px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+  margin-right: auto; /* Отодвигает абсолютно всё меню и иконки вправо */
+}
+
+/* Навигационное меню для ПК */
+.nav-horizontal {
+  margin-right: 25px; /* Отодвигает меню от иконок соцсетей */
+}
+
+.nav-horizontal ul {
+  list-style: none;
+  display: flex;
+  gap: 25px; /* Фиксированный отступ между пунктами меню */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-horizontal a {
+  color: var(--text-light, #ffffff);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  white-space: nowrap; /* Запрещает разрыв слов в пунктах меню */
+}
+
+.nav-horizontal a:hover,
+.nav-horizontal a.active {
+  color: #e2b1a8;
+}
+
+/* Блок иконок соцсетей */
+.header-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0; /* Не дает иконкам сжиматься */
+}
+
+/* Белая круглая подложка для иконок */
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  color: var(--accent-burgundy, #a37267);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  opacity: 0.95;
+}
+
+/* ==========================================
+   АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   ========================================== */
+
+@media (max-width: 768px) {
+  .header-container,
+  .header-content {
+    gap: 15px; /* Безопасный зазор между логотипом, иконками и бургером */
+  }
+
+  .site-logo, .logo {
+    max-height: 28px;   /* Чуть уменьшаем логотип на смартфонах */
+    margin-right: auto; /* Жестко прижимает логотип влево */
+  }
+
+  .header-socials {
+    margin-left: 0;
+  }
+
+  .social-icon-link {
+    width: 30px;        /* Компактный размер иконок на мобильном */
+    height: 30px;
+  }
+
+  .nav-horizontal {
+    background-color: #b5978e;
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  background-color: transparent;
+}
+
+.hero-text {
+  grid-column: 1 / 7;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  line-height: 1.05;
+  color: var(--text-dark);
+  font-weight: 300;
+}
+
+.hero-text .subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  margin: 15px 0 35px;
+}
+
+.hero-img-box {
+  grid-column: 7 / 13;
+}
+
+/* ==========================================
+   4. БЛОК ОБО МНЕ
+   ========================================== */
+.about-section {
+  margin-top: 100px;
+}
+
+.about-img-box {
+  grid-column: 1 / 6;
+}
+
+.about-text {
+  grid-column: 6 / 13;
+  padding-left: 20px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.about-text .muted-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   5. ТИПОГРАФИКА И КНОПКИ
+   ========================================== */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background-color: var(--accent-burgundy);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   6. ПОРТФОЛИО С КАРУСЕЛЯМИ
+   ========================================== */
+.portfolio-section {
+  margin-top: 100px;
+}
+
+.portfolio-desc {
+  max-width: 900px; /* Увеличено, чтобы текст помещался в одну-две широкие строки */
+  margin-top: 15px;
+  margin-bottom: 50px; /* Отступ снизу, чтобы текст не лип к карусели */
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.carousel-block {
+  position: relative;
+}
+
+.carousel-title {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 15px;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+#photoTrack .carousel-item {
+  flex: 0 0 300px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bg-card);
+}
+
+#videoTrack .carousel-item {
+  flex: 0 0 240px;
+  aspect-ratio: 9 / 16;
+  height: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  position: relative;
+}
+
+.carousel-item img,
+.carousel-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.carousel-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--text-dark);
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: var(--accent-burgundy);
+  color: #ffffff;
+  border-color: var(--accent-burgundy);
+}
+
+.video-item {
+  position: relative;
+}
+
+.video-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(30, 25, 24, 0.65);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* ==========================================
+   7. РАЗДЕЛ ПРАЙС
+   ========================================== */
+.price-section {
+  margin-top: 100px;
+}
+
+.price-content {
+  grid-column: 1 / 7;
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+.price-img-box {
+  grid-column: 7 / 13;
+}
+
+.price-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+.price-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px dashed #dcd3ce;
+  padding-bottom: 10px;
+}
+
+.price-name {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.price-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.price-val {
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--accent-burgundy);
+  white-space: nowrap;
+  margin-left: 15px;
+}
+
+.back-link {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--text-dark);
+}
+
+.price-btn {
+  margin-top: 35px;
+}
+
+/* ==========================================
+   8. РАЗДЕЛ ДОСТИЖЕНИЯ
+   ========================================== */
+.achievements-section {
+  margin-top: 100px;
+}
+
+.achievements-content {
+  grid-column: 1 / 7;
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+.achievements-img-box {
+  grid-column: 7 / 13;
+}
+
+.achievements-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+/* Единый стиль для абзацев под заголовком */
+.achievement-lead,
+.achievements-content .muted-text,
+.achievements-content p {
+  font-size: 0.95rem;
+  font-weight: 300;        /* Единый тонкий шрифт */
+  color: var(--text-dark); /* Единый цвет для обоих абзацев */
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* ==========================================
+   9. РАЗДЕЛ КОНТАКТЫ
+   ========================================== */
+.contacts-section {
+  margin-top: 120px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contacts-img-box {
+  grid-column: 1 / 6;
+  position: relative;
+}
+
+.contacts-signature {
+  margin-top: 20px;
+}
+
+.contacts-signature .script-name {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--text-dark);
+}
+
+.contacts-signature .signature-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 5px;
+}
+
+.contacts-info {
+  grid-column: 6 / 13;
+  padding-left: 20px;
+}
+
+.contacts-info h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.contacts-intro {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 35px;
+  max-width: 540px;
+}
+
+.contacts-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.detail-item {
+  border-left: 2px solid var(--accent-burgundy);
+  padding-left: 15px;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+}
+
+.detail-value {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-top: 2px;
+}
+
+.contacts-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 13px 28px;
+  border: 1px solid var(--text-dark);
+  background: transparent;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.contacts-logo-img {
+  max-width: 220px; /* Настройте максимальную ширину под ваш PNG */
+  height: auto;
+  display: block;
+}
+
+.btn-outline:hover {
+  background-color: var(--text-dark);
+  color: #ffffff;
+}
+
+/* ==========================================
+   10. АДАПТИВНОСТЬ (МОБИЛЬНАЯ ВЕРСИЯ)
+   ========================================== */
+@media (max-width: 768px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header-nav {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .nav-horizontal ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .about-text,
+  .price-content,
+  .achievements-content,
+  .contacts-info {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0;
+    order: 1;
+  }
+
+  .about-img-box,
+  .price-img-box,
+  .achievements-img-box,
+  .contacts-img-box {
+    order: 2;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+
+  #photoTrack .carousel-item {
+    flex: 0 0 220px;
+  }
+
+  #videoTrack .carousel-item {
+    flex: 0 0 200px;
+  }
+
+  .contacts-section {
+    margin-top: 80px;
+    padding-top: 40px;
+  }
+
+  .contacts-socials {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contacts-socials .btn-primary,
+  .contacts-socials .btn-outline {
+    text-align: center;
+  }
+}
+
+/* ==========================================
+   11. ЕДИНАЯ СТРАНИЦА УСЛУГ (МАКИЯЖ + ПРИЧЕСКА)
+   ========================================== */
+.page-service-container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.service-section {
+  margin-bottom: 60px;
+}
+
+.service-page-title {
+  text-align: center;
+  font-size: 2.8rem;
+  letter-spacing: 0.08em;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.service-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 70px 0;
+}
+
+/* Общая сетка */
+.service-grid {
+  display: grid;
+  justify-content: center;
+  gap: 35px;
+}
+
+/* Сетка из 3 колонок (Макияж) */
+.service-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* Сетка из 2 колонок (Прическа) */
+.service-grid.cols-2 {
+  grid-template-columns: repeat(2, 340px);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card-img-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.service-card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.service-card h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.service-card-desc {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+/* Список особенностей в карточках услуг */
+.service-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+.service-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.service-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-burgundy);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ==========================================
+   КАРТОЧКА СВАДЕБНОГО МАКИЯЖА
+   ========================================== */
+
+/* Карточка занимает всю ширину сетки из 3 колонок */
+.full-width-card {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Контейнер для двух фото расширен до ширины ~2 стандартных колонок */
+.service-card-double-img {
+  display: flex;
+  gap: 35px; /* Зазор точно такой же, как в сетке gap: 35px */
+  width: 100%;
+  max-width: 685px; /* (325px * 2) + 35px — размер двух полноценных карточек */
+  margin-bottom: 20px;
+}
+
+/* Каждое фото имеет ширину и квадратную пропорцию, 1 в 1 как верхние карточки */
+.service-card-double-img img {
+  width: calc(50% - 17.5px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Текстовый блок под снимками */
+.full-width-card .service-card-content {
+  max-width: 685px;
+}
+
+/* Адаптив для планшетов и телефонов */
+@media (max-width: 768px) {
+  .service-card-double-img {
+    max-width: 100%;
+    gap: 15px;
+  }
+  
+  .service-card-double-img img {
+    width: calc(50% - 7.5px);
+  }
+}
+
+@media (max-width: 650px) {
+  .service-card-double-img {
+    max-width: 100%; /* На смартфонах занимает всю ширину экрана */
+  }
+}
+
+/* Адаптивы для мобильных устройств */
+@media (max-width: 992px) {
+  .service-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .service-grid.cols-3,
+  .service-grid.cols-2 {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .service-page-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+}
+/* ==========================================
+   12. СТРАНИЦА ОБУЧЕНИЯ
+   ========================================== */
+.page-education-container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.education-section {
+  align-items: center;
+  margin-top: 20px;
+}
+
+.education-text {
+  grid-column: 1 / 7;
+  padding-right: 20px;
+}
+
+.education-img-box {
+  grid-column: 7 / 13;
+}
+
+.page-title {
+  font-size: 2.8rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.course-subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  color: var(--accent-burgundy);
+}
+
+.course-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.course-meta {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.course-price {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent-burgundy);
+  margin-bottom: 30px;
+}
+
+/* Адаптив для мобильных устройств */
+@media (max-width: 768px) {
+  .education-text {
+    grid-column: 1 / 13;
+    padding-right: 0;
+  }
+  
+  .education-img-box {
+    grid-column: 1 / 13;
+    margin-top: 30px;
+  }
+}
+
+/* ==========================================
+   СТИЛИ ДЛЯ БУРГЕР-МЕНЮ (ПО УМОЛЧАНИЮ СКРЫТО НА ПК)
+   ========================================== */
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.burger-btn span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-light);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Анимация крестика при открытии */
+.burger-btn.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.burger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger-btn.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ==========================================
+   АДАПТИВНОСТЬ ДЛЯ ЭКРАНОВ МЕНЕЕ 768px
+   ========================================== */
+@media (max-width: 768px) {
+  .header-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .burger-btn {
+    display: flex; /* Показываем кнопку бургер */
+  }
+
+  /* Выпадающее выпадающее меню */
+  .nav-horizontal {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #4a4543;
+    padding: 20px 0;
+    display: none; /* Скрываем по умолчанию */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-horizontal.active {
+    display: block; /* Показываем при клике */
+  }
+
+  .nav-horizontal ul {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .nav-horizontal a {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================
+   СМЕЩЕННЫЕ ПОДЛОЖКИ ПОД БЛОКИ
+   ========================================== */
+
+/* Общие правила для базовых блоков */
+.hero-section,
+.about-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* 1. HERO SECTION: прямоугольник смещен вниз и вправо */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 40px;                  /* Смещение вниз */
+  left: -30px;                 /* Смещение вправо */
+  width: 100%;
+  height: 90%;
+  background-color: var(--bg-card); /* Светло-пудровый цвет подложки */
+  border-radius: 4px;
+  z-index: -1;                /* Убираем за контент */
+}
+
+/* 2. БЛОК ОБО МНЕ: прямоугольник смещен вниз и влево */
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 40px;                  /* Смещение вниз */
+  left: 70px;                /* Смещение влево */
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-card);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  padding-bottom: 60px;
+  overflow-x: hidden; /* Предотвращает появлению горизонтального скролла из-за смещенных элементов */
+}
+
+@media (max-width: 768px) {
+  .hero-section::before {
+    top: 20px;
+    left: 15px;
+    height: 100%;
+  }
+
+  .about-section::before {
+    top: 20px;
+    left: -15px;
+    height: 100%;
+  }
+}
+/* 3. БЛОК КОНТАКТЫ: прямоугольник смещен вниз и вправо */
+.contacts-section {
+  position: relative;
+  z-index: 1;
+}
+
+.contacts-section::before {
+  content: '';
+  position: absolute;
+  top: 40px;                  /* Смещение вниз */
+  left: 40px;                 /* Смещение вправо (если нужно влево, поставьте -40px) */
+  width: 100%;
+  height: 90%;
+  background-color: var(--bg-card); /* Светло-пудровый цвет подложки */
+  border-radius: 4px;
+  z-index: -1;
+}
+@media (max-width: 768px) {
+  .contacts-section::before {
+    top: 20px;
+    left: 15px;
+    height: 100%;
+  }
+}
+
+/* ==========================================
+   НИЖНЯЯ ПАНЕЛЬ (COPYRIGHT)
+   ========================================== */
+.footer-bottom {
+  margin-top: 60px;
+  padding: 25px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer-bottom-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.developer-credit {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
